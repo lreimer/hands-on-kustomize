@@ -7,6 +7,8 @@ commonLabels:
 namespace: demo
 nameSuffix: -v1
 
+buildMetadata: [managedByLabel]
+
 resources:
   - microservice-deployment.yaml
   - microservice-service.yaml
