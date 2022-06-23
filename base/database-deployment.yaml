@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    type: database
+  name: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: database
+  template:
+    metadata:
+      labels:
+        type: database
+    spec:
+      containers:
+        - name: database
+          image: postgres:12.2-alpine
+          imagePullPolicy: "IfNotPresent"
+          envFrom:
+            - configMapRef:
+                name: database-configmap
+          ports:
+            - containerPort: 3306

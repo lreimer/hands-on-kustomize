@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productive-cloud-native-devex
+  labels:
+    type: microservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      type: microservice
+  template:
+    metadata:
+      labels:
+        type: microservice
+    spec:
+      containers:
+        - name: productive-cloud-native-devex
+          image: productive-cloud-native-devex
+          envFrom:
+            - configMapRef:
+                name: microservice-configmap
+            - secretRef:
+                name: microservice-secrets
+          ports:
+            - containerPort: 8080
